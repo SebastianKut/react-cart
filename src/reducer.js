@@ -52,7 +52,15 @@ const reducer = (state, action) => {
     return { ...state, amount, total };
   }
 
-  return state;
+  if (action.type === 'LOADING') {
+    return { ...state, loading: true };
+  }
+
+  if (action.type === 'DISPLAY_DATA') {
+    return { ...state, cart: action.payload, loading: false };
+  }
+
+  throw new Error('No action found');
 };
 
 export default reducer;
